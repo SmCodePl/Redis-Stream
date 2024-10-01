@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  streams:
+    image: redis
+
+  production.workerservice:
+    image: ${DOCKER_REGISTRY-}productionworkerservice
+    build:
+      context: .
+      dockerfile: Production.WorkerService/Dockerfile

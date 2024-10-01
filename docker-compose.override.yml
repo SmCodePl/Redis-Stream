@@ -1,0 +1,15 @@
+services:
+  streams:
+    container_name: streams
+    restart: always
+    ports:
+     - "6379:6379"
+
+  production.workerservice:
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - ConnectionStrings__Redis=streams:6379
+    depends_on:
+      - streams
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
